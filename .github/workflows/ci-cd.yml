@@ -1,0 +1,45 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-and-test-backend:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v2
+    
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: '6.0.x'
+        
+    - name: Restore dependencies
+      run: dotnet restore ./EmployeesV2/EmployeesV2.Api/EmployeesV2.Api.csproj
+      
+    - name: Build
+      run: dotnet build ./EmployeesV2/EmployeesV2.Api/EmployeesV2.Api.csproj --no-restore
+      
+    - name: Test
+      run: dotnet test ./EmployeesV2/EmployeesV2.Api/EmployeesV2.Api.csproj --no-build --verbosity normal
+
+  build-and-test-frontend:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v2
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '14'
+        
+    - name: Install dependencies
+      run: npm install --prefix ./EmployeesV2/clientapp
+      
+    - name: Build
+      run: npm run build --prefix ./EmployeesV2/clientapp
