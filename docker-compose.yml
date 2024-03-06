@@ -1,9 +1,7 @@
 version: '3.8'
 services:
   api:
-    build:
-      context: ./EmployeesV2/EmployeesV2.Api
-      dockerfile: Dockerfile
+    image: leonidtuz/employeesv2-api:latest
     ports:
       - "5000:80"
     depends_on:
@@ -12,9 +10,7 @@ services:
       ConnectionStrings__DefaultConnection: "Host=db;Port=5432;Database=tuzdatabase;Username=leonid;Password=777project"
 
   client:
-    build:
-      context: ./EmployeesV2/clientapp
-      dockerfile: Dockerfile
+    image: leonidtuz/employeesv2-clientapp:latest
     ports:
       - "3000:80"
 
@@ -28,6 +24,6 @@ services:
       - db_data:/var/lib/postgresql/data
     ports:
       - "5432:5432"
-    
+
 volumes:
   db_data:
