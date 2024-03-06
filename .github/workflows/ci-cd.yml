@@ -28,16 +28,16 @@ jobs:
           docker-compose push
 
   deploy:
-    needs: build-and-push
-    runs-on: ubuntu-latest
-    steps:
-      - name: Deploy to VM
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.VM_HOST }}
-          username: ${{ secrets.VM_USERNAME }}
-          password: ${{ secrets.VM_PASSWORD }}
-          script: |
+  needs: build-and-push
+  runs-on: ubuntu-latest
+  steps:
+    - name: Deploy to VM
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.VM_HOST }}
+        username: ${{ secrets.VM_USERNAME }}
+        key: ${{ secrets.SSH_PRIVATE_KEY }}
+        script: |
             cd путь до проекта
             docker-compose pull
             docker-compose up -d
