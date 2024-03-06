@@ -32,6 +32,6 @@ jobs:
           username: ${{ secrets.VM_USERNAME }}
           password: ${{ secrets.VM_PASSWORD }}
           script: |
-            cd /path/to/your/project
+            cd тут будет путь до проекта
             docker-compose pull
             docker-compose up -d
