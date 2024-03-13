@@ -55,3 +55,4 @@ jobs:
             cd ~/tuz_project/EmployeesV2
             docker compose pull
             docker compose up -d
+            docker compose exec -T api dotnet ef database update
