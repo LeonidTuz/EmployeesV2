@@ -37,9 +37,13 @@ jobs:
         run: |
           docker compose build
 
-      - name: Push Docker images
+      - name: Push API Docker image
         run: |
-          docker compose push
+          docker push leonidtuz/employeesv2-api
+          
+      - name: Push API Docker image
+        run: |
+          docker push leonidtuz/employeesv2-clientapp
 
   deploy:
     needs: build-and-push
