@@ -14,9 +14,6 @@ FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
 
-COPY entrypoint.sh .
-RUN chmod +x entrypoint.sh
-
 EXPOSE 80
 EXPOSE 443
 ENTRYPOINT ["dotnet", "EmployeesV2.Api.dll"]

@@ -25,7 +25,7 @@ services:
       POSTGRES_PASSWORD: 777project
       POSTGRES_DB: tuzdatabase
     volumes:
-      - db_data:/var/lib/postgresql/data
+      - ./init_db.sql:/docker-entrypoint-initdb.d/init_db.sql
 
   nginx:
     image: nginx:alpine
